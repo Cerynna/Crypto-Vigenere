@@ -1,128 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-			crossorigin="anonymous"
-		/>
-		<link rel="stylesheet" href="./css/main.css" />
-		<title>Vigenere</title>
-	</head>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"/>
+        <link rel="stylesheet" href="./css/main.css"/>
+        <title>Vigenere</title>
+    </head>
 
-	<body>
-		<div class="header container-fluid">
-			<div class="row"><div class="col">Code Vigenere</div></div>
-		</div>
-		<div class="body container">
-			<div class="row">
-				<div class="col-2 col-xs-12"><label for="key">Clef d'encriptage :</label></div>
-				<div class="col">
-					<input type="text" name="key" id="key" value="RIMBAUD" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2 col-xs-12"><label for="text">Message :</label></div>
-				<div class="col">
-					<textarea name="text" id="text" cols="30" rows="8">Assez vu. La vision s'est rencontrée à tous les airs. 
-Assez eu. Rumeurs des villes, le soir, et au soleil, et toujours. 
-Assez connu. Les arrêts de la vie. - Ô Rumeurs et Visions ! 
-Départ dans l'affection et le bruit neufs !</textarea>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2"></div>
-				<div class="col center"><div class="crypt">Encrypter le Text</div></div>
-			</div>
-			<div class="row">
-				<div class="col-2 col-xs">Résultat : </div>
-				<div class="col">
-					<textarea name="result" id="result" cols="30" rows="8"></textarea>
-				</div>
-			</div>
-			<!-- Content here -->
-		</div>
-		</div>
-		<script
-			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-			crossorigin="anonymous"
-		></script>
-		<script>
-			const crypt = document.querySelector('.crypt');
+    <body>
+        <div class="header container-fluid">
+            <div class="row">
+                <div class="col">Code Vigenere</div>
+            </div>
+        </div>
+        <div class="body container">
+            <div class="row">
+                <div class="col-2 col-xs-12">
+                    <label for="key">Clef d'encriptage :</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="key" id="key" value="RIMBAUD"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-xs-12">
+                    <label for="text">Message :</label>
+                </div>
+                <div class="col">
+                    <textarea name="text" id="text" cols="30" rows="8">SALUT LES MOCHES</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col right">
+                    <div class="crypt">Encrypter le Text</div>
+                </div>
+                <div class="col left">
+                    <div class="encrypt">Décrypter le Text</div>
 
-			const key = document.querySelector('#key');
-			const message = document.querySelector('#text');
-			const result = document.querySelector('#result');
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-xs">Résultat :
+                </div>
+                <div class="col">
+                    <textarea name="result" id="result" cols="30" rows="8"></textarea>
+                </div>
+            </div>
+            <!-- Content here -->
+        </div>
+    </div>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script>
+        const crypt = document.querySelector('.crypt');
+        const encrypt = document.querySelector('.encrypt');
 
-			crypt.addEventListener('click', () => {
-				console.log('CLICK');
-				console.log(key);
-				console.log(message);
+        const key = document.querySelector('#key');
+        const message = document.querySelector('#text');
+        const result = document.querySelector('#result');
 
-				result.value = cryptToVigenere(message.value, key.value);
-			});
+        crypt.addEventListener('click', () => {
+            result.value = cryptToVigenere(message.value, key.value);
+        });
 
-			function alphabetPosition(letter, vigenere = false) {
-				var code = letter.toUpperCase().charCodeAt(0);
-				if (code > 64 && code < 91) {
-					if (vigenere === true) {
-						return code - 64 - 1;
-					}
-					return code - 64;
-				}
-			}
+        encrypt.addEventListener('click', () => {
+            result.value = cryptToVigenere(message.value, key.value, true);
+        });
 
-			function cryptToVigenere(text, key) {
-				const Alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ';
-				text = text.toUpperCase();
-				key = key.toUpperCase();
-				let longkey = key;
-				for (let index = 0; index < text.length; index++) {
-					longkey += key;
-				}
-				longkey = longkey.substring(0, text.length);
+        function alphabetPosition(letter, vigenere = false) {
+            var code = letter
+                .toUpperCase()
+                .charCodeAt(0);
+            if (code > 64 && code < 91) {
+                if (vigenere === true) {
+                    return code - 64 - 1;
+                }
+                return code - 64;
+            }
+        }
 
-				let message = '';
-				for (let index = 0; index < text.length; index++) {
-					console.log('LETTER : ', text[index]);
-					if (Alpha.indexOf(text[index]) < 0) {
-						message += text[index];
-					} else {
-						const indexAlpha =
-							alphabetPosition(text[index]) +
-							alphabetPosition(longkey[index], true);
+        function cryptToVigenere(text, key, invert = false) {
+            const Alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            text = text.toUpperCase();
+            key = key.toUpperCase();
+            let longkey = key;
+            for (let index = 0; index < text.length; index++) {
+                longkey += key;
+            }
+            longkey = longkey.substring(0, text.length);
+            let message = '';
+            for (let index = 0; index < text.length; index++) {
 
-console.log(indexAlpha);
+                if (Alpha.indexOf(text[index]) < 0) {
+                    message += text[index];
+                } else {
+                    let indexAlpha = alphabetPosition(text[index]) + alphabetPosition(longkey[index], true);
+                    if (invert === true) {
+                        indexAlpha = alphabetPosition(text[index], true) - alphabetPosition(longkey[index])
+                    }
+                    if (indexAlpha < 0) {
+                        indexAlpha = indexAlpha + 26;
+                    }
+                    if (indexAlpha > 26) {
+                        indexAlpha = indexAlpha - 26;
+                    }
+                    message += Alpha[indexAlpha];
+/*                     let verif = {
+                        letter: text[index],
+                        keyAlpha: alphabetPosition(text[index]),
+                        letterAlpha: Alpha[alphabetPosition(text[index]) - 1],
+                        keyVigenenre: alphabetPosition(longkey[index], true),
+                        letterVigenenre: Alpha[alphabetPosition(longkey[index], true)],
+                        result: Alpha[indexAlpha],
+                        resultKey: indexAlpha
+                    }
+                    console.log('LETTER : ', verif); */
+                }
 
-
-						message += Alpha[indexAlpha];
-					}
-				}
-				return message;
-			}
-
-			console.log(alphabetPosition('A', true));
-			console.log(
-				cryptToVigenere(
-					'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit sunt fugiat libero voluptatum minus ad assumenda dolor voluptate sint, culpa accusantium, distinctio dolorem, consequuntur eum! Ipsam reiciendis facilis ab deserunt.',
-					'ABCD'
-				)
-			);
-		</script>
-	</body>
+            }
+            return message;
+        }
+    </script>
+</body>
 </html>

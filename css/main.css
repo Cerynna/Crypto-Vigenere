@@ -29,7 +29,7 @@ body .header {
   font-size: 2em;
 }
 
-body .body .crypt {
+body .body .crypt, body .body .encrypt {
   background: rgba(39, 110, 216, 0.2);
   border-radius: 5px;
   border: 4px solid rgba(255, 255, 255, 0.2);
@@ -40,7 +40,7 @@ body .body .crypt {
   cursor: pointer;
 }
 
-body .body .crypt:hover {
+body .body .crypt:hover, body .body .encrypt:hover {
   background: rgba(39, 110, 216, 0.7);
   border: 4px solid rgba(255, 255, 255, 0.9);
 }
