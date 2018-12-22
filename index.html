@@ -25,7 +25,7 @@
                     <label for="key">Clef d'encriptage :</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="key" id="key" value="RIMBAUD"/>
+                    <input type="text" name="key" id="key" value="JONATHAN"/>
                 </div>
             </div>
             <div class="row">
@@ -33,7 +33,9 @@
                     <label for="text">Message :</label>
                 </div>
                 <div class="col">
-                    <textarea name="text" id="text" cols="30" rows="8">SALUT LES MOCHES</textarea>
+                    <textarea name="text" id="text" cols="30" rows="8">J'ESPERE QUE CETTE PETIT DEVINETTE NE T'AURAS PAS DONNE TROP DE FILS A RETORDRE.
+DEVENIR ADULTE A NOEL C'EST PRENDRE PLUS DE PLAISIR A OFFRIR QUE A RECEVOIR DES CADEAUX. 
+N'EN PROFITE PAS POUR TOUTES LES BOIRE EN UNE SOIREE CA NE SERAI PAS TRES RAISONNABLE.</textarea>
                 </div>
             </div>
             <div class="row">
@@ -53,9 +55,19 @@
                     <textarea name="result" id="result" cols="30" rows="8"></textarea>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="toImg">
+                        Crée une image !!!
+                    </div>
+                </div>
+            </div>
             <!-- Content here -->
         </div>
     </div>
+
+    <canvas id="canvas" height="743px" width="1050px" style="display:none;"></canvas>
+
     <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -71,10 +83,19 @@
     <script>
         const crypt = document.querySelector('.crypt');
         const encrypt = document.querySelector('.encrypt');
+        const toImg = document.querySelector('.toImg');
 
         const key = document.querySelector('#key');
         const message = document.querySelector('#text');
         const result = document.querySelector('#result');
+        const canvas = document.querySelector('#canvas');
+
+        const ctx = canvas.getContext("2d");
+
+        const backgroung = document.createElement("img");
+				const nbchar = 50;
+
+        backgroung.src = "img/back.png";
 
         crypt.addEventListener('click', () => {
             result.value = cryptToVigenere(message.value, key.value);
@@ -82,6 +103,64 @@
 
         encrypt.addEventListener('click', () => {
             result.value = cryptToVigenere(message.value, key.value, true);
+        });
+        toImg.addEventListener('click', () => {
+            console.log(canvas.style.display);
+            (canvas.style.display === 'block')
+                ? canvas.style.display = 'none'
+                : canvas.style.display = 'block';
+            ctx.fillStyle = "#FFF";
+            ctx.fillRect(0, 0, 1050, 743);
+            ctx.drawImage(backgroung, 10, 10, 1030, 723);
+            ctx.fillStyle = "rgba(255,255,255,.15)";
+            ctx.font = "180px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText(key.value.toUpperCase(), canvas.width / 2, canvas.height / 2 + 50);
+            ctx.fillStyle = "rgba(0,0,0,.5)";
+            ctx.font = "5px Arial";
+            ctx.textAlign = "right";
+            ctx.fillText('https://cerynna.github.io/', canvas.width - 10, 740);
+
+            let text = result
+                .value
+                .toUpperCase();
+
+            text = text
+                .split(/[\r\n]/g)
+                .filter(function (el) {
+                    return el != "";
+                });
+
+            
+            let messages = [];
+            text.forEach((row, key) => {
+                for (let index = 0; index < Math.ceil(row.length / nbchar); index++) {
+                    messages.push(row.slice((index * nbchar), ((index + 1) * nbchar)))
+
+                }
+                
+                
+            });
+						let linePosition = canvas.height / 2 - ((messages.length/2)*35);
+						messages.forEach((message, key)=>{
+								ctx.fillStyle = "#000";
+                ctx.font = "30px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText(message, canvas.width / 2, linePosition + (35 * key));
+						})
+
+            /*
+            ctx.fillStyle = "#000";
+            ctx.font = "20px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText("J'ESPERE QUE CETTE PETIT DEVINETTE NE T'AURAS PAS DONNE TROP DE FILS A RETORDRE.", canvas.width / 2, canvas.height / 2 - 40);
+            ctx.fillText("DEVENIR ADULTE A NOEL C'EST PRENDRE PLUS DE PLAISIR A OFFRIR QUE A RECEVOIR DES " +
+                    "CADEAUX.",
+            canvas.width / 2, canvas.height / 2);
+            ctx.fillText("N'EN PROFITE PAS POUR TOUTES LES BOIRE EN UNE SOIREE CA NE SERAI PAS TRES RAISON" +
+                    "NABLE.",
+            canvas.width / 2, canvas.height / 2 + 40); */
+
         });
 
         function alphabetPosition(letter, vigenere = false) {
@@ -99,6 +178,7 @@
         function cryptToVigenere(text, key, invert = false) {
             const Alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             text = text.toUpperCase();
+
             key = key.toUpperCase();
             let longkey = key;
             for (let index = 0; index < text.length; index++) {
@@ -118,11 +198,11 @@
                     if (indexAlpha < 0) {
                         indexAlpha = indexAlpha + 26;
                     }
-                    if (indexAlpha > 26) {
+                    if (indexAlpha > 25) {
                         indexAlpha = indexAlpha - 26;
                     }
                     message += Alpha[indexAlpha];
-/*                     let verif = {
+                    let verif = {
                         letter: text[index],
                         keyAlpha: alphabetPosition(text[index]),
                         letterAlpha: Alpha[alphabetPosition(text[index]) - 1],
@@ -131,7 +211,7 @@
                         result: Alpha[indexAlpha],
                         resultKey: indexAlpha
                     }
-                    console.log('LETTER : ', verif); */
+                    console.log('LETTER : ', verif);
                 }
 
             }
