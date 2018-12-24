@@ -25,17 +25,21 @@ body {
     }
   }
 canvas{
-
-  background: red;
-  position: fixed;
-  top: 10px;
-  left: 10px;
   border: 5px solid #000;
   }
   .header {
     text-align: center;
     padding: 2vh 100px;
     font-size: 2em;
+  }
+  .render{
+    background: yellow;
+    position: fixed;  
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 3% 20%;
   }
 
   .body {

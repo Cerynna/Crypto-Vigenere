@@ -53,19 +53,22 @@
                     <textarea name="result" id="result" cols="30" rows="8"></textarea>
                 </div>
             </div>
-            <div class="row">
-							<div class="col-2"></div>
+            <!-- <div class="row">
+                <div class="col-2"></div>
                 <div class="col">
                     <div class="toImg">
                         Crée une image !!!
                     </div>
                 </div>
+            </div> -->
+            <div class="render" style="display:none;">
+                <canvas id="canvas" height="743px" width="1050px"></canvas>
+                <div class="toImg">Close</div>
             </div>
             <!-- Content here -->
         </div>
-    </div>
 
-    <canvas id="canvas" height="743px" width="1050px" style="display:none;"></canvas>
+    </div>
 
     <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -83,16 +86,17 @@
         const crypt = document.querySelector('.crypt');
         const encrypt = document.querySelector('.encrypt');
         const toImg = document.querySelector('.toImg');
+        const render = document.querySelector('.render');
 
         const key = document.querySelector('#key');
         const message = document.querySelector('#text');
         const result = document.querySelector('#result');
-        const canvas = document.querySelector('#canvas');
+        const canvas = document.getElementById('canvas');
 
         const ctx = canvas.getContext("2d");
 
         const backgroung = document.createElement("img");
-				const nbchar = 50;
+        const nbchar = 50;
 
         backgroung.src = "img/back.png";
 
@@ -104,10 +108,9 @@
             result.value = cryptToVigenere(message.value, key.value, true);
         });
         toImg.addEventListener('click', () => {
-            console.log(canvas.style.display);
-            (canvas.style.display === 'block')
-                ? canvas.style.display = 'none'
-                : canvas.style.display = 'block';
+            (render.style.display === 'block')
+                ? render.style.display = 'none'
+                : render.style.display = 'block';
             ctx.fillStyle = "#FFF";
             ctx.fillRect(0, 0, 1050, 743);
             ctx.drawImage(backgroung, 10, 10, 1030, 723);
@@ -130,23 +133,23 @@
                     return el != "";
                 });
 
-            
             let messages = [];
             text.forEach((row, key) => {
                 for (let index = 0; index < Math.ceil(row.length / nbchar); index++) {
                     messages.push(row.slice((index * nbchar), ((index + 1) * nbchar)))
 
                 }
-                
-                
+
             });
-						let linePosition = canvas.height / 2 - ((messages.length/2)*35);
-						messages.forEach((message, key)=>{
-								ctx.fillStyle = "#000";
+            let linePosition = canvas.height / 2 - ((messages.length / 2) * 35);
+            messages.forEach((message, key) => {
+                ctx.fillStyle = "#000";
                 ctx.font = "30px Arial";
                 ctx.textAlign = "center";
                 ctx.fillText(message, canvas.width / 2, linePosition + (35 * key));
-						})
+            })
+            ctx.save();
+
         });
 
         function alphabetPosition(letter, vigenere = false) {
@@ -188,7 +191,7 @@
                         indexAlpha = indexAlpha - 26;
                     }
                     message += Alpha[indexAlpha];
-                    let verif = {
+                    /* let verif = {
                         letter: text[index],
                         keyAlpha: alphabetPosition(text[index]),
                         letterAlpha: Alpha[alphabetPosition(text[index]) - 1],
@@ -197,7 +200,7 @@
                         result: Alpha[indexAlpha],
                         resultKey: indexAlpha
                     }
-                    console.log('LETTER : ', verif);
+                    console.log('LETTER : ', verif); */
                 }
 
             }
